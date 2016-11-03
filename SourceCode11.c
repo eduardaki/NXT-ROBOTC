@@ -13,6 +13,7 @@ task main(){
   bool pressedL = false;
   bool pressedR = false;
   bool lift = false;
+  // wait1Msec(3000); // a three second delay
 
 
   while(true){
@@ -43,6 +44,8 @@ task main(){
     }
 
     if ((lite > 10) && (thres < 15) && (lift == false)){ // lift over enemy
+      nVolume = 4;
+      PlaySoundFile("Woops.rso");
       nMotorEncoder[motorB] = 0;
       nMotorEncoderTarget[motorB] = -30;
       motor[motorB] = -100;
@@ -52,12 +55,19 @@ task main(){
     else {
     }
 
-    if(touchL == 1){ // if touch LEFT, return pressedL TRUE
-      pressedL = true;
+    if(touchL == 1){ // if touch LEFT, return pressedL TRUE & try to unpress touchL
+        pressedL = true;
+        motor[motorA] = 30;
+        motor[motorC] = 30;
+    }
+      
+    else{
     }
 
-    if(touchR == 1){ // if touch RIGHT, return pressedR TRUE
-      pressedR = true;
+    if(touchR == 1){ // if touch RIGHT, return pressedR TRUE & try to unpress touchR
+        pressedR = true;
+        motor[motorA] = 30;
+        motor[motorC] = 30;
     }
 
     else{
@@ -86,7 +96,7 @@ task main(){
    }
 
    if((touchR == 0) && (pressedR == true)){ // when the enemy bump RIGHT, turn its behind
-      nMotorEncoder[motorA] = 0;
+        nMotorEncoder[motorA] = 0;
 	    nMotorEncoder[motorC] = 0;
 	    nMotorEncoderTarget[motorA] = 720;
 	    nMotorEncoderTarget[motorC] = 1440;
@@ -114,9 +124,9 @@ task main(){
       motor[motorC] = -15;
       wait1Msec(2000);
       motor[motorA] = 15;
-      motor[motorC] = 0;
+      motor[motorC] = -15;
       srand(2500);
-      wait1Msec(random(5000));
+      wait1Msec(random(4000));
     }
 
     else{
@@ -128,10 +138,10 @@ task main(){
       motor[motorA] = -15;
       motor[motorC] = -15;
       wait1Msec(2000);
-      motor[motorA] = 0;
+      motor[motorA] = -15;
       motor[motorC] = 15;
       srand(2600);
-      wait1Msec(random(5000));
+      wait1Msec(random(4000));
    }
 
    else{
