@@ -1,4 +1,2 @@
 # NXT-ROBOTC
-Lego Mindstorms NXT Sumo Competetion on RobotC
-
-READ ME
+Lego Mindstorms NXT Sumo Competetion in RobotC
